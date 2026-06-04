@@ -29,9 +29,9 @@ body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;h
 .cat-tabs::-webkit-scrollbar{height:0}
 .tab{white-space:nowrap;padding:.38rem .82rem;border-radius:20px;background:var(--card);border:1px solid var(--br);color:var(--muted);font-size:.72rem;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
 .tab:hover{color:var(--text);border-color:var(--gold)}.tab.on{background:var(--gold);color:var(--dark);border-color:var(--gold);font-weight:700;box-shadow:0 2px 8px rgba(201,168,76,.2)}.tab[data-id=""]{min-width:90px}.tab[data-id=""].on{background:linear-gradient(135deg,var(--gold),var(--gold-l));font-weight:800;letter-spacing:.3px}
-.menu-grid{flex:1;overflow-y:auto;padding:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1rem;align-content:start}
+.menu-grid{flex:1;overflow-y:auto;padding:1rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;align-content:start}
 .menu-grid::-webkit-scrollbar{width:4px}.menu-grid::-webkit-scrollbar-thumb{background:var(--br);border-radius:2px}
-.mk{background:var(--card);border:1px solid var(--br);border-radius:11px;overflow:hidden;cursor:pointer;transition:all .15s;user-select:none;display:flex;flex-direction:column;min-height:265px}
+.mk{background:var(--card);border:1px solid var(--br);border-radius:11px;overflow:hidden;cursor:pointer;transition:all .15s;user-select:none;display:flex;flex-direction:column;min-height:220px}
 .mk:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 16px rgba(201,168,76,.1)}
 .mk.oos{opacity:.4;cursor:not-allowed}.mk.oos:hover{transform:none;border-color:var(--br);box-shadow:none}
 .mk-img{width:100%;aspect-ratio:1;background:#222;display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden;flex-shrink:0}
@@ -113,6 +113,41 @@ body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;h
 @keyframes spin{to{transform:rotate(360deg)}}
 /* FLASH */
 .flash{position:fixed;top:65px;right:1rem;z-index:9999;padding:.7rem 1.1rem;border-radius:8px;font-size:.82rem;font-weight:500;box-shadow:0 4px 16px rgba(0,0,0,.3);animation:up .2s ease;display:flex;align-items:center;gap:.5rem}
+
+@media (max-width:1024px) {
+  body{height:auto;}
+  .pos{grid-template-columns:1fr;}
+  .cat-panel{border-right:none;border-bottom:1px solid var(--br);}
+  .cart-panel{min-height:320px;}
+  .cat-bar,.cat-tabs,.checkout{padding-left:1rem;padding-right:1rem;}
+  .menu-grid{padding:1rem;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+  .mk{min-height:200px;}
+  .cart-head{flex-wrap:wrap;gap:.5rem;}
+  .cart-title{width:100%;}
+  .cart-clear{order:2;width:100%;text-align:left;}
+}
+
+@media (max-width:680px) {
+  .top{flex-wrap:wrap;gap:.5rem;justify-content:flex-start;}
+  .top-right{width:100%;justify-content:flex-start;}
+  .top-mid{width:100%;font-size:.72rem;}
+  .cat-bar{padding:.6rem .8rem;}
+  .cat-tabs{padding:.5rem .8rem;gap:.3rem;}
+  .tab{font-size:.65rem;padding:.35rem .7rem;}
+  .menu-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.8rem;}
+  .mk{min-height:180px;}
+  .mk-name{font-size:.76rem;}
+  .mk-price{font-size:.82rem;}
+  .cart-head{padding:.7rem .9rem;}
+  .cart-title{font-size:.9rem;}
+  .ci{padding:.55rem;}
+  .qb{width:22px;height:22px;font-size:.8rem;}
+  .bayar-inp{font-size:.9rem;padding:.6rem .75rem;}
+  .kemb-row{padding:.5rem .7rem;}
+  .modal,.qris-modal{padding:1.5rem;}
+  .modal-icon{font-size:2.5rem;}
+  .modal-title{font-size:1.1rem;}
+}
 </style>
 </head>
 <body>
@@ -229,7 +264,7 @@ body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;h
     <div style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.5rem">Pembayaran QRIS</div>
     <div class="qris-amount" id="qrisAmount"></div>
     <div class="qris-box">
-      <img src="{{ asset('storage/qris/qris.png') }}" alt="QRIS Code">
+      <img src="{{ asset('storage/qris/qris.jpg') }}" alt="QRIS Code">
     </div>
     <div class="qris-info">Scan QR code di atas menggunakan<br>aplikasi e-wallet atau mobile banking Anda.<br><strong style="color:var(--text)">Merchant: BrewLux Café</strong></div>
     <div class="qris-timer" id="qrisTimer">Menunggu pembayaran...</div>
@@ -436,7 +471,8 @@ async function prosesTransaksi() {
 
   const bayar = metode === 'tunai' ? (parseInt(document.getElementById('bayarInp').value)||0) : total;
   if (metode === 'tunai' && bayar < total) { flash('Uang bayar kurang!','red'); return; }
-  await kirimTransaksi(total, bayar, total - bayar < 0 ? 0 : bayar - total);
+  const kemb = Math.max(0, bayar - total);
+  await kirimTransaksi(total, bayar, kemb);
 }
 
 

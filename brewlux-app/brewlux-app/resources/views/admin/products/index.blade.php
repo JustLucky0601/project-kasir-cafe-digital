@@ -3,6 +3,9 @@
 @section('breadcrumb','Kelola semua item menu kafe')
 @section('content')
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem">
+  @if(session()->has('tersedia_saved'))
+  <div style="color:var(--muted);font-size:.9rem">Nilai `tersedia` disimpan: <strong>{{ session('tersedia_saved') ? 'true' : 'false' }}</strong></div>
+  @endif
   <form method="GET" style="display:flex;gap:.6rem;flex-wrap:wrap">
     <input type="text" name="search" value="{{ request('search') }}" placeholder="🔍 Cari produk..." class="fc" style="width:200px">
     <select name="kategori" class="fc" style="width:150px">

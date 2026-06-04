@@ -53,7 +53,7 @@
     </table>
   </div>
   @if($transaksis->hasPages())
-  <div style="padding:1rem 1.4rem;border-top:1px solid var(--br)">{{ $transaksis->withQueryString()->links() }}</div>
+  <div style="padding:1rem 1.4rem;border-top:1px solid var(--br)">{{ $transaksis->withQueryString()->links('pagination::simple-default') }}</div>
   @endif
 </div>
 @endsection

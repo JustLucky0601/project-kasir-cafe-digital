@@ -28,6 +28,17 @@ body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;d
 .pg-t{font-family:'Playfair Display',serif;font-size:1.2rem}.pg-s{font-size:.7rem;color:var(--muted);margin-top:2px}
 .tb-d{font-size:.7rem;color:var(--muted);background:var(--card);padding:.32rem .65rem;border-radius:6px;border:1px solid var(--br)}
 .cnt{padding:1.75rem;flex:1}
+/* Remove any large decorative background images that may appear under content */
+.cnt{background-image:none!important}
+/* Pagination small styles for admin lists */
+.pagination{display:flex;gap:.4rem;list-style:none;padding:0;margin:.5rem 0}
+.pagination li{display:inline-block}
+.pagination a,.pagination span{display:inline-block;padding:.18rem .42rem;background:var(--card);border:1px solid var(--br);color:var(--muted);border-radius:6px;font-size:.68rem;line-height:1;max-height:26px;overflow:hidden;text-decoration:none}
+.pagination a:hover{color:var(--gold);border-color:var(--gold)}
+.pagination .disabled span{opacity:.5;cursor:default}
+
+/* Hide any pseudo-content arrows added by vendor pagination templates */
+.pagination a::before,.pagination a::after,.pagination span::before,.pagination span::after{display:none!important}
 .alert{padding:.78rem 1rem;border-radius:8px;font-size:.83rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
 .al-s{background:rgba(76,175,125,.1);border:1px solid rgba(76,175,125,.25);color:#6FCF97}
 .al-e{background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);color:#F19393}

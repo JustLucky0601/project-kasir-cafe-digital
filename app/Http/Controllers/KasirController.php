@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\{Produk, Kategori, Transaksi, DetailTransaksi};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth, DB};
+use Illuminate\Support\Facades\{Auth, DB, Log};
 
 class KasirController extends Controller {
     public function index() {
@@ -76,7 +76,16 @@ class KasirController extends Controller {
             $buktiPath = null;
             $statusPembayaran = null;
             $totalBayar = (int) $request->total_bayar;
-            $kembalian  = (int) $request->kembalian;
+            // Hitung kembalian di server berdasarkan total yang dibayar minus total harga
+            $kembalian  = max(0, $totalBayar - (int) $request->total_harga);
+
+            // Log payload singkat untuk debugging jika masih ada masalah
+            Log::info('Kasir transaksi incoming', [
+                'total_harga' => $request->total_harga,
+                'total_bayar' => $request->total_bayar,
+                'computed_kembalian' => $kembalian,
+                'metode' => $request->metode_bayar,
+            ]);
 
             if ($request->metode_bayar === 'transfer') {
                 // transfer diproses langsung tanpa upload bukti

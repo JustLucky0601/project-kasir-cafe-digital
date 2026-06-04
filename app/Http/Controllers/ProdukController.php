@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Models\{Produk, Kategori};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ProdukController extends Controller {
     public function index(Request $request) {
@@ -34,7 +35,7 @@ class ProdukController extends Controller {
             $f->storeAs('products',$name,'public');
             $v['foto'] = $name;
         }
-        $v['tersedia'] = $request->boolean('tersedia',true);
+        $v['tersedia'] = $request->boolean('tersedia',false);
         $v['best_seller'] = $request->boolean('best_seller', false);
         Produk::create($v);
         return redirect()->route('admin.products.index')->with('success','Produk berhasil ditambahkan!');
@@ -64,10 +65,19 @@ class ProdukController extends Controller {
             if ($produk->foto) Storage::disk('public')->delete('products/'.$produk->foto);
             $v['foto'] = null;
         }
-        $v['tersedia'] = $request->boolean('tersedia',true);
-        $v['best_seller'] = $request->boolean('best_seller', false);
-        $produk->update($v);
-        return redirect()->route('admin.products.index')->with('success','Produk berhasil diperbarui!');
+            // Pastikan checkbox yang tidak tercentang disimpan sebagai false
+            $v['tersedia'] = $request->has('tersedia') ? 1 : 0;
+            $v['best_seller'] = $request->has('best_seller') ? 1 : 0;
+
+            // Terapkan perubahan secara eksplisit ke model untuk menghindari masalah filling
+            $produk->fill($v);
+            $produk->save();
+            Log::info('Produk update received', [
+                'id' => $produk->id,
+                'request_all' => $request->all(),
+                'saved_tersedia' => $produk->tersedia,
+            ]);
+        return redirect()->route('admin.products.index')->with('success','Produk berhasil diperbarui!')->with('tersedia_saved', $produk->tersedia);
     }
 
     public function destroy(Produk $produk) {

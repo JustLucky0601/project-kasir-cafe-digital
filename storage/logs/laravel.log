@@ -1744,3 +1744,83 @@
 #60 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('D://xampp//htdocs...')
 #61 {main}
 "} 
+[2026-06-03 13:08:38] local.ERROR: PHP Parse error: Syntax error, unexpected ')' on line 1 {"exception":"[object] (Psy\\Exception\\ParseErrorException(code: 0): PHP Parse error: Syntax error, unexpected ')' on line 1 at D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Exception/ParseErrorException.php:44)
+[stacktrace]
+#0 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/CodeCleaner.php(657): Psy/Exception/ParseErrorException::fromParseError(Object(PhpParser/Error))
+#1 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/CodeCleaner.php(273): Psy/CodeCleaner->parse('<?php foreach(//...', false)
+#2 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(1364): Psy/CodeCleaner->clean(Array, false)
+#3 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(1471): Psy/Shell->appendCode('foreach(//App//Mo...', true, false)
+#4 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(2180): Psy/Shell->setCode('foreach(//App//Mo...', true)
+#5 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/tinker/src/Console/TinkerCommand.php(77): Psy/Shell->execute('foreach(//App//Mo...')
+#6 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Laravel/Tinker/Console/TinkerCommand->handle()
+#7 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate/Container/BoundMethod::Illuminate/Container/{closure}()
+#8 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate/Container/Util::unwrapIfClosure(Object(Closure))
+#9 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate/Container/BoundMethod::callBoundMethod(Object(Illuminate/Foundation/Application), Array, Object(Closure))
+#10 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate/Container/BoundMethod::call(Object(Illuminate/Foundation/Application), Array, Array, NULL)
+#11 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Console/Command.php(213): Illuminate/Container/Container->call(Array)
+#12 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Command/Command.php(341): Illuminate/Console/Command->execute(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#13 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Symfony/Component/Console/Command/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#14 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(1117): Illuminate/Console/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#15 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(356): Symfony/Component/Console/Application->doRunCommand(Object(Laravel/Tinker/Console/TinkerCommand), Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#16 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#17 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#18 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#19 D:/xampp/htdocs/brewlux-pos/brewlux-pos/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#20 {main}
+"} 
+[2026-06-03 13:08:49] local.ERROR: PHP Parse error: Syntax error, unexpected T_NS_SEPARATOR on line 1 {"exception":"[object] (Psy\\Exception\\ParseErrorException(code: 0): PHP Parse error: Syntax error, unexpected T_NS_SEPARATOR on line 1 at D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Exception/ParseErrorException.php:44)
+[stacktrace]
+#0 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/CodeCleaner.php(657): Psy/Exception/ParseErrorException::fromParseError(Object(PhpParser/Error))
+#1 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/CodeCleaner.php(273): Psy/CodeCleaner->parse('<?php foreach(//...', false)
+#2 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(1364): Psy/CodeCleaner->clean(Array, false)
+#3 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(1471): Psy/Shell->appendCode('foreach(//App//Mo...', true, false)
+#4 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/psy/psysh/src/Shell.php(2180): Psy/Shell->setCode('foreach(//App//Mo...', true)
+#5 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/tinker/src/Console/TinkerCommand.php(77): Psy/Shell->execute('foreach(//App//Mo...')
+#6 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Laravel/Tinker/Console/TinkerCommand->handle()
+#7 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate/Container/BoundMethod::Illuminate/Container/{closure}()
+#8 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate/Container/Util::unwrapIfClosure(Object(Closure))
+#9 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate/Container/BoundMethod::callBoundMethod(Object(Illuminate/Foundation/Application), Array, Object(Closure))
+#10 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate/Container/BoundMethod::call(Object(Illuminate/Foundation/Application), Array, Array, NULL)
+#11 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Console/Command.php(213): Illuminate/Container/Container->call(Array)
+#12 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Command/Command.php(341): Illuminate/Console/Command->execute(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#13 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Symfony/Component/Console/Command/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#14 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(1117): Illuminate/Console/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#15 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(356): Symfony/Component/Console/Application->doRunCommand(Object(Laravel/Tinker/Console/TinkerCommand), Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#16 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#17 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#18 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#19 D:/xampp/htdocs/brewlux-pos/brewlux-pos/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#20 {main}
+"} 
+[2026-06-03 13:14:14] local.INFO: Produk update received {"id":19,"request_tersedia":null,"saved_tersedia":true} 
+[2026-06-03 13:17:15] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit."},"saved_tersedia":false} 
+[2026-06-03 13:17:28] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit.","tersedia":"1"},"saved_tersedia":true} 
+[2026-06-03 13:17:38] local.INFO: Produk update received {"id":19,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Brown Sugar Boba Milk","kategori_id":"2","harga":"28000","stok":"50","deskripsi":"Susu segar dengan brown sugar syrup dan pearl tapioka chewy di dasarnya.","best_seller":"1"},"saved_tersedia":false} 
+[2026-06-03 13:17:53] local.INFO: Produk update received {"id":19,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Brown Sugar Boba Milk","kategori_id":"2","harga":"28000","stok":"50","deskripsi":"Susu segar dengan brown sugar syrup dan pearl tapioka chewy di dasarnya.","tersedia":"1","best_seller":"1"},"saved_tersedia":true} 
+[2026-06-03 13:18:18] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit."},"saved_tersedia":false} 
+[2026-06-03 13:18:27] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit.","tersedia":"1"},"saved_tersedia":true} 
+[2026-06-03 13:18:40] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit.","tersedia":"1","best_seller":"1"},"saved_tersedia":true} 
+[2026-06-03 13:18:45] local.INFO: Produk update received {"id":32,"request_all":{"_token":"THsZ5hMkxgTS6der7HqoSGLvHe35ncZwqCWGSPHk","_method":"PUT","nama_produk":"Matcha Basque Cheesecake","kategori_id":"5","harga":"38000","stok":"50","deskripsi":"Cheesecake burnt style dengan matcha premium, tekstur creamy dan sedikit pahit.","tersedia":"1"},"saved_tersedia":true} 
+[2026-06-03 13:49:14] local.INFO: Kasir transaksi incoming {"total_harga":155000,"total_bayar":200000,"computed_kembalian":45000,"metode":"tunai"} 
+[2026-06-03 13:51:08] local.INFO: Produk update received {"id":1,"request_all":{"_token":"KsKB3ZnuBpHiBYJuyRsFdxyfjXKWFAo3wTXEAc3i","_method":"PUT","nama_produk":"Espresso Classico","kategori_id":"1","harga":"18000","stok":"43","deskripsi":"Espresso murni dengan crema sempurna dari biji arabika pilihan.","tersedia":"1"},"saved_tersedia":true} 
+[2026-06-03 14:26:42] local.INFO: Kasir transaksi incoming {"total_harga":98000,"total_bayar":98000,"computed_kembalian":0,"metode":"tunai"} 
+[2026-06-03 14:27:55] local.INFO: Kasir transaksi incoming {"total_harga":95000,"total_bayar":95000,"computed_kembalian":0,"metode":"qris"} 
+[2026-06-03 14:34:24] local.INFO: Kasir transaksi incoming {"total_harga":90000,"total_bayar":90000,"computed_kembalian":0,"metode":"tunai"} 
+[2026-06-03 14:35:31] local.INFO: Kasir transaksi incoming {"total_harga":105000,"total_bayar":105000,"computed_kembalian":0,"metode":"qris"} 
+[2026-06-03 14:41:14] local.INFO: Kasir transaksi incoming {"total_harga":85000,"total_bayar":100000,"computed_kembalian":15000,"metode":"tunai"} 
+[2026-06-04 01:17:18] local.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Input/ArgvInput.php:226)
+[stacktrace]
+#0 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Input/ArgvInput.php(153): Symfony/Component/Console/Input/ArgvInput->addLongOption('columns', 'method,uri,name...')
+#1 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Input/ArgvInput.php(88): Symfony/Component/Console/Input/ArgvInput->parseLongOption('--columns=metho...')
+#2 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Input/ArgvInput.php(77): Symfony/Component/Console/Input/ArgvInput->parseToken('--columns=metho...', true)
+#3 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Input/Input.php(53): Symfony/Component/Console/Input/ArgvInput->parse()
+#4 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Command/Command.php(295): Symfony/Component/Console/Input/Input->bind(Object(Symfony/Component/Console/Input/InputDefinition))
+#5 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Symfony/Component/Console/Command/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Illuminate/Console/OutputStyle))
+#6 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(1117): Illuminate/Console/Command->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#7 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(356): Symfony/Component/Console/Application->doRunCommand(Object(Illuminate/Foundation/Console/RouteListCommand), Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#8 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/symfony/console/Application.php(195): Symfony/Component/Console/Application->doRun(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#9 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony/Component/Console/Application->run(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#10 D:/xampp/htdocs/brewlux-pos/brewlux-pos/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
+#11 D:/xampp/htdocs/brewlux-pos/brewlux-pos/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
+#12 {main}
+"} 

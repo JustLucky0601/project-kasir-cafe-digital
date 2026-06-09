@@ -137,6 +137,7 @@ class KasirController extends Controller {
                     'harga_satuan' => $p->harga,
                     'subtotal'     => $p->harga * (int) $item['qty'],
                 ]);
+                // Untuk tunai dan qris: stok langsung dipotong
                 $p->decrement('stok', (int) $item['qty']);
             }
 

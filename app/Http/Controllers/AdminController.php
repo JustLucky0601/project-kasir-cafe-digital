@@ -12,15 +12,63 @@ class AdminController extends Controller {
         $stokRendah      = Produk::where('stok','<=',10)->count();
         $pendapatanBulan = Transaksi::whereMonth('tanggal_transaksi', now()->month)->whereYear('tanggal_transaksi', now()->year)->sum('total_harga');
 
-        $raw = Transaksi::selectRaw('DATE(tanggal_transaksi) as tgl, SUM(total_harga) as total')
+        // -----------------------
+        // Daily (last 7 days)
+        // -----------------------
+        $rawDaily = Transaksi::selectRaw('DATE(tanggal_transaksi) as tgl, SUM(total_harga) as total')
             ->whereBetween('tanggal_transaksi',[now()->subDays(6)->startOfDay(), now()->endOfDay()])
             ->groupBy('tgl')->orderBy('tgl')->get()->keyBy('tgl');
 
-        $chartLabels = $chartData = [];
+        $chartDailyLabels = $chartDailyData = [];
         for ($i=6; $i>=0; $i--) {
-            $d = now()->subDays($i)->format('Y-m-d');
-            $chartLabels[] = now()->subDays($i)->locale('id')->isoFormat('ddd D/M');
-            $chartData[]   = $raw->has($d) ? (int)$raw[$d]->total : 0;
+            $dt = now()->subDays($i);
+            $d  = $dt->format('Y-m-d');
+            $chartDailyLabels[] = $dt->locale('id')->isoFormat('ddd D/M');
+            $chartDailyData[]   = $rawDaily->has($d) ? (int)$rawDaily[$d]->total : 0;
+        }
+
+        // -----------------------
+        // Weekly (same as daily labels/data, but provide separate vars)
+        // -----------------------
+        $chartWeeklyLabels = $chartWeeklyData = [];
+        // Use last 7 days as 1 point per day
+        foreach ($chartDailyLabels as $idx => $lbl) {
+            $chartWeeklyLabels[] = $lbl;
+            $chartWeeklyData[] = $chartDailyData[$idx] ?? 0;
+        }
+
+        // -----------------------
+        // Monthly daily (current month, per day)
+        // Provide 0..(days in month) points.
+        // If you want only 1..12 points, adjust accordingly.
+        // -----------------------
+        $monthStart = now()->startOfMonth();
+        $monthEnd   = now()->endOfMonth();
+
+        $rawMonthDaily = Transaksi::selectRaw('DATE(tanggal_transaksi) as tgl, SUM(total_harga) as total')
+            ->whereBetween('tanggal_transaksi', [$monthStart->startOfDay(), $monthEnd->endOfDay()])
+            ->groupBy('tgl')->orderBy('tgl')->get()->keyBy('tgl');
+
+        $daysInMonth = (int)$monthStart->daysInMonth;
+        $chartMonthDailyLabels = $chartMonthDailyData = [];
+        for ($day=1; $day<=$daysInMonth; $day++) {
+            $dt = $monthStart->copy()->day($day);
+            $d  = $dt->format('Y-m-d');
+            $chartMonthDailyLabels[] = $dt->format('d'); // 01..31
+            $chartMonthDailyData[]   = $rawMonthDaily->has($d) ? (int)$rawMonthDaily[$d]->total : 0;
+        }
+
+        // -----------------------
+        // Monthly totals (current year, 12 months)
+        // -----------------------
+        $year = now()->year;
+        $rawMonthTotal = Transaksi::selectRaw('MONTH(tanggal_transaksi) as m, SUM(total_harga) as total')
+            ->whereYear('tanggal_transaksi', $year)
+            ->groupBy('m')->get()->keyBy('m');
+
+        $chartMonthTotalValues = [];
+        for ($m=1; $m<=12; $m++) {
+            $chartMonthTotalValues[] = isset($rawMonthTotal[$m]) ? (int)$rawMonthTotal[$m]->total : 0;
         }
 
         $topProduk = DetailTransaksi::selectRaw('produk_id, SUM(jumlah_beli) as total_terjual')
@@ -29,10 +77,18 @@ class AdminController extends Controller {
         $transaksiTerbaru = Transaksi::with('user')->latest()->limit(10)->get();
 
         return view('admin.dashboard', compact(
-            'totalPendapatan','totalTransaksi','totalProduk','stokRendah',
-            'pendapatanBulan','chartLabels','chartData','topProduk','transaksiTerbaru'
+            'totalPendapatan', 'totalTransaksi', 'totalProduk', 'stokRendah',
+            'pendapatanBulan',
+
+            'chartDailyLabels', 'chartDailyData',
+            'chartWeeklyLabels', 'chartWeeklyData',
+            'chartMonthDailyLabels', 'chartMonthDailyData',
+            'chartMonthTotalValues',
+
+            'topProduk', 'transaksiTerbaru'
         ));
     }
+
 
     public function users() {
         $users = User::latest()->get();

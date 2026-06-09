@@ -627,6 +627,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
+     * @property boolean $best_seller
      * @property boolean $tersedia
      * @property string|null $deskripsi
      * @property string|null $foto
@@ -647,6 +648,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereFoto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereDeskripsi($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereTersedia($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereBestSeller($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Produk>|Produk newModelQuery()
@@ -1573,6 +1575,8 @@ namespace App\Models {
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Transaksi> $transaksis
      * @property-read int|null $transaksis_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+     * @property-read int|null $tokens_count
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereUsername($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePassword($value)

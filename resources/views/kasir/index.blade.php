@@ -366,21 +366,18 @@ function setMetode(btn) {
   const tunai = document.getElementById('tunai-section');
   const nontunai = document.getElementById('nontunai-section');
   const info = document.getElementById('nontunai-info');
-  // dulu ada transfer-section (untuk upload bukti), sekarang tidak dipakai
-  const transferSection = null;
 
   if (metode === 'tunai') {
     tunai.style.display = 'block'; nontunai.style.display = 'none';
     hitungKembalian();
   } else {
     tunai.style.display = 'none'; nontunai.style.display = 'block';
-    info.textContent = metode === 'qris' ? 'Scan QRIS — kembalian Rp 0' : 'Transfer bank — kembalian Rp 0';
-
-    if (metode === 'transfer') {
-      document.getElementById('btnBayar').disabled = cart.length === 0;
+    if (metode === 'qris') {
+      info.textContent = 'Scan QRIS — kembalian Rp 0';
     } else {
-      document.getElementById('btnBayar').disabled = cart.length === 0;
+      info.textContent = 'Transfer bank — kembalian Rp 0';
     }
+    document.getElementById('btnBayar').disabled = cart.length === 0;
   }
 }
 
@@ -462,20 +459,19 @@ async function prosesTransaksi() {
     return;
   }
 
-      if (metode === 'transfer') {
+  if (metode === 'transfer') {
     // transfer: langsung proses tanpa upload bukti transfer
-    await kirimTransaksi(total, 0, 0);
+    await kirimTransaksi(total, 0, 0, null);
     return;
   }
-
 
   const bayar = metode === 'tunai' ? (parseInt(document.getElementById('bayarInp').value)||0) : total;
   if (metode === 'tunai' && bayar < total) { flash('Uang bayar kurang!','red'); return; }
   const kemb = Math.max(0, bayar - total);
-  await kirimTransaksi(total, bayar, kemb);
+  await kirimTransaksi(total, bayar, kemb, null);
 }
 
-
+// ─── QRIS TIMER ───────────────────────────────
 function startQrisTimer() {
   let sisa = 120;
   clearInterval(qrisInterval);
@@ -492,7 +488,7 @@ function konfirmasiQris() {
   clearInterval(qrisInterval);
   document.getElementById('qrisOverlay').classList.remove('show');
   const total = cart.reduce((s,i) => s+i.harga*i.qty, 0);
-  kirimTransaksi(total, total, 0);
+  kirimTransaksi(total, total, 0, null);
 }
 
 function batalQris() {
@@ -500,7 +496,7 @@ function batalQris() {
   document.getElementById('qrisOverlay').classList.remove('show');
 }
 
-async function kirimTransaksi(total, bayar, kembalian) {
+async function kirimTransaksi(total, bayar, kembalian, gatewayOrderId) {
   document.getElementById('loadingOverlay').classList.add('show');
   document.getElementById('btnBayar').disabled = true;
   try {

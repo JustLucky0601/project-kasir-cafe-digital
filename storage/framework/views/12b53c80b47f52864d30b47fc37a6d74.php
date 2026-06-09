@@ -25,7 +25,15 @@
 </div>
 <div class="g2" style="margin-bottom:1.5rem">
   <div class="card">
-    <div class="card-h"><span class="card-t">📈 Pendapatan 7 Hari Terakhir</span></div>
+    <div class="card-h" style="gap:1rem">
+      <span class="card-t">📈 Pendapatan</span>
+      <div style="display:flex;gap:.45rem;align-items:center;flex-wrap:wrap">
+        <button type="button" class="btn btn-o btn-sm" id="btnChartDaily" style="border-color:var(--gold);color:var(--gold)">Harian</button>
+        <button type="button" class="btn btn-o btn-sm" id="btnChartWeekly">Perminggu</button>
+        <button type="button" class="btn btn-o btn-sm" id="btnChartMonthlyDaily">Perhari</button>
+        <button type="button" class="btn btn-o btn-sm" id="btnChartMonthlyTotal">Bulanan</button>
+      </div>
+    </div>
     <div class="card-b"><canvas id="chartBar" height="140"></canvas></div>
   </div>
   <div class="card">
@@ -72,18 +80,94 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('scripts'); ?>
 <script>
-new Chart(document.getElementById('chartBar'),{
+const chartDailyLabels = <?php echo json_encode($chartDailyLabels); ?>;
+const chartDailyData = <?php echo json_encode($chartDailyData); ?>;
+const chartWeeklyLabels = <?php echo json_encode($chartWeeklyLabels); ?>;
+const chartWeeklyData = <?php echo json_encode($chartWeeklyData); ?>;
+const chartMonthDailyLabels = <?php echo json_encode($chartMonthDailyLabels); ?>;
+const chartMonthDailyData = <?php echo json_encode($chartMonthDailyData); ?>;
+
+// Bulanan (total pendapatan per bulan pada tahun berjalan)
+const chartMonthTotalLabels = <?php echo json_encode(range(1,12)); ?>;
+const chartMonthTotalLabelsFormatted = chartMonthTotalLabels.map(m => formatMonthLabel(m));
+const chartMonthTotalValues = <?php echo json_encode($chartMonthTotalValues ?? array_fill(0,12,0)); ?>;
+
+
+
+
+
+
+
+
+const chartEl = document.getElementById('chartBar');
+let chart = new Chart(chartEl,{
   type:'bar',
   data:{
-    labels:<?php echo json_encode($chartLabels); ?>,
-    datasets:[{label:'Pendapatan',data:<?php echo json_encode($chartData); ?>,
+    labels: chartDailyLabels,
+    datasets:[{label:'Pendapatan',data: chartDailyData,
       backgroundColor:'rgba(201,168,76,.25)',borderColor:'#C9A84C',borderWidth:2,borderRadius:6}]
   },
   options:{responsive:true,plugins:{legend:{display:false}},
     scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#7A7570',font:{size:10}}},
       y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#7A7570',font:{size:10},callback:v=>'Rp '+(v/1000).toFixed(0)+'k'}}}}
 });
+
+function setChartData(labels, data){
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = data;
+  chart.update();
+}
+
+function formatMonthLabel(m){
+  // m: 1..12
+  const names = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  return names[m-1] ?? m;
+}
+
+
+const btnDaily = document.getElementById('btnChartDaily');
+const btnWeekly = document.getElementById('btnChartWeekly');
+const btnMonthDaily = document.getElementById('btnChartMonthlyDaily');
+const btnMonthTotal = document.getElementById('btnChartMonthlyTotal');
+
+
+function setActive(btn){
+  [btnDaily, btnWeekly, btnMonthDaily, btnMonthTotal].forEach(b => {
+    if (!b) return;
+    b.style.borderColor = 'var(--br)';
+    b.style.color = 'var(--muted)';
+  });
+  if (btn){
+    btn.style.borderColor = 'var(--gold)';
+    btn.style.color = 'var(--gold)';
+  }
+}
+
+
+btnDaily && btnDaily.addEventListener('click', () => {
+  setChartData(chartDailyLabels, chartDailyData);
+  setActive(btnDaily);
+});
+btnWeekly && btnWeekly.addEventListener('click', () => {
+  setChartData(chartWeeklyLabels, chartWeeklyData);
+  setActive(btnWeekly);
+});
+btnMonthDaily && btnMonthDaily.addEventListener('click', () => {
+  setChartData(chartMonthDailyLabels, chartMonthDailyData);
+  setActive(btnMonthDaily);
+});
+
+btnMonthTotal && btnMonthTotal.addEventListener('click', () => {
+  // Bulanan = total pendapatan per bulan pada tahun berjalan
+  // dataset tahunan dihitung di controller
+  setChartData(chartMonthTotalLabelsFormatted, chartMonthTotalValues);
+  setActive(btnMonthTotal);
+});
+
+
+setActive(btnDaily);
 </script>
+
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\xampp\htdocs\brewlux-pos\brewlux-pos\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>
